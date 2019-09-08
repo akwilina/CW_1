@@ -1,6 +1,7 @@
 package lotto_simulator;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,25 +10,16 @@ import static java.util.Arrays.sort;
 public class lottoSimulator {
 
     public static void main (String [] args) {
-        lottoGenerator();
+
+        Scanner scanner = new Scanner(System.in);
+
+        userNumbers();
         randomNumbers();
     }
 
     public static void lottoGenerator() {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj 6 losowych liczb od 0 do 49");
-        int userNr1 = scanner.nextInt();
-        int userNr2 = scanner.nextInt();
-        int userNr3 = scanner.nextInt();
-        int userNr4 = scanner.nextInt();
-        int userNr5 = scanner.nextInt();
-        int userNr6 = scanner.nextInt();
 
-        int[] userArray = new int[6];
-        userArray = new int[]{userNr1, userNr2, userNr3, userNr4, userNr5, userNr6};
-        sort(userArray);
-        System.out.println(Arrays.toString(userArray));
     }
 
     public static void randomNumbers() {
@@ -54,6 +46,74 @@ public class lottoSimulator {
     }
 
 
+    public static void userNumbers () {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj 6 losowych liczb od 0 do 49");
+        /*int userNr1 = scanner.nextInt();
+        int userNr2 = scanner.nextInt();
+        int userNr3 = scanner.nextInt();
+        int userNr4 = scanner.nextInt();
+        int userNr5 = scanner.nextInt();
+        int userNr6 = scanner.nextInt();
+        */
+
+
+        int[] userArray = new int[6];
+
+        int userNumber = scanner.nextInt();
+        int nextNumber = 0;
+
+            try {
+                if (userNumber > 0 && userNumber < 50) {
+
+                    while (true) {
+                        if (nextNumber != userNumber) {
+
+                            for (int i = 0; i < 6; i++) {
+                                userNumber = scanner.nextInt();
+                                userArray[i] = userNumber;
+
+                            }
+                            nextNumber = userNumber;
+
+                        } else {
+                            System.out.println("Ta liczba została już podana, podaj inną liczbę: ");
+                            userNumbers();
+                        }
+                    }
+                } else {
+                    System.out.println("Podaj liczbę z zakresu 1-49.");
+                    userNumbers();
+                }
+            } catch (InputMismatchException e){
+                System.out.println("To nie jest liczba! \n Podaj liczbę z zakresu 1-49.");
+                userNumbers();
+            }
+
+
+
+
+        //userArray = new int[]{userNr1, userNr2, userNr3, userNr4, userNr5, userNr6};
+        sort(userArray);
+        System.out.println(Arrays.toString(userArray));
+
+    }
+
+    public static int isInRange (int userNumberInRange) {
+        Scanner scanner = new Scanner(System.in);
+        int userNumber = scanner.nextInt();
+
+        if (userNumber > 0 && userNumber < 50) {
+            userNumber =
+        } else {
+            System.out.println("Podaj liczbę z zakresu 1-49.");
+            userNumbers();
+        }
+
+
+
+    }
 
 
 
